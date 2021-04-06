@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: KCMS Slider
+Plugin Name: KCMS Slide
 Plugin URI: https://github.com/KubeeCMS/KCMS-Slide/
-Description: KCMS Slider
+Description: KCMS Slide ...
 Author: Kubee
 Text Domain: revslider
 Domain Path: /languages
