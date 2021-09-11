@@ -1,7 +1,7 @@
 <?php
 /**
  * @author    ThemePunch <info@themepunch.com>
- * @link      https://github.com/KubeeCMS/KCMS-Slide/
+ * @link      https://www.themepunch.com/
  * @copyright 2019 ThemePunch
  */
 
@@ -1234,7 +1234,7 @@ class RevSliderObjectLibrary extends RevSliderFunctions {
 		
 		$found = false;
 		foreach($import as $k => $v){
-			$handle = ($zip === true) ? basename($v) : $name; //if zip is false, file has still a temporary name
+			$handle = ($zip === true) ? basename($v) : basename($name); //if zip is false, file has still a temporary name
 			$new = $this->upload_dir['basedir'] . $this->customsvgpath . $lib_type . '/' . $handle;
 			$url = $this->upload_dir['baseurl'] . $this->customsvgpath . $lib_type . '/' . $handle;
 			$i = 1;

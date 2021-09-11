@@ -1,8 +1,8 @@
 <?php
 /**
- * @author    Kubee <info@Kubee.com>
- * @link      https://github.com/KubeeCMS/KCMS-Slide/
- * @copyright 2019 Kubee
+ * @author    ThemePunch <info@themepunch.com>
+ * @link      https://www.themepunch.com/
+ * @copyright 2019 ThemePunch
  */
 
 if(!defined('ABSPATH')) exit();
@@ -18,7 +18,8 @@ class RevSliderShortcodeWizard extends RevSliderFunctions {
 
 		// only add scripts if native WordPress editor, Gutenberg or Visual Composer
 		// Elementor has its own hooks for adding scripts
-		if($action === 'edit' || $pagenow === 'post-new.php' || $f->get_val($_GET, 'vc_action', '') === 'vc_inline'){
+		
+		if($action === 'edit' || $pagenow === 'post-new.php' || $pagenow === 'widgets.php' || $f->get_val($_GET, 'vc_action', '') === 'vc_inline'){
 			self::add_scripts();
 		}
 
@@ -29,13 +30,12 @@ class RevSliderShortcodeWizard extends RevSliderFunctions {
 		//wp_enqueue_style('revslider-material-icons', RS_PLUGIN_URL . 'admin/assets/icons/material-icons.css', array(), RS_REVISION);
 		wp_enqueue_style('revslider-basics-css', RS_PLUGIN_URL . 'admin/assets/css/basics.css', array(), RS_REVISION);
 		wp_enqueue_style('rs-color-picker-css', RS_PLUGIN_URL . 'admin/assets/css/tp-color-picker.css', array(), RS_REVISION);
-		wp_enqueue_style('revbuilder-select2RS', RS_PLUGIN_URL . 'admin/assets/css/select2RS.css', array(), RS_REVISION);
+		wp_enqueue_style('revbuilder-ddTP', RS_PLUGIN_URL . 'admin/assets/css/ddTP.css', array(), RS_REVISION);
 		wp_enqueue_style('rs-roboto', '//fonts.googleapis.com/css?family=Roboto');
 		wp_enqueue_style('tp-material-icons', '//fonts.googleapis.com/icon?family=Material+Icons');
 	}
 
 	public static function add_scripts($elementor = false, $divi = false){
-
 		$f = RevSliderGlobals::instance()->get('RevSliderFunctions');
 		$action = $f->get_val($_GET, 'action');
 		if($elementor && $action !== 'elementor') return;
@@ -49,11 +49,11 @@ class RevSliderShortcodeWizard extends RevSliderFunctions {
 		if(!current_user_can('edit_posts') && !current_user_can('edit_pages')) return;
 		if(!$elementor && !$divi){
 			//verify the post type
-			global $typenow;
+			global $typenow, $pagenow;
 
 			$post_types = get_post_types();
 			if(empty($post_types) || !is_array($post_types)) $post_types = array('post', 'page');
-			if(!in_array($typenow, $post_types)) return;
+			if(!in_array($typenow, $post_types) && $pagenow !== 'widgets.php') return;
 
 			$current_screen = get_current_screen();
 
@@ -81,8 +81,8 @@ class RevSliderShortcodeWizard extends RevSliderFunctions {
 
 		if($dev_mode === true){
 			wp_enqueue_script('revbuilder-basics', RS_PLUGIN_URL . 'admin/assets/js/modules/basics.js', array('jquery'), RS_REVISION, false);
-			wp_enqueue_script('revbuilder-select2RS', RS_PLUGIN_URL . 'admin/assets/js/plugins/select2RS.full.min.js', array('jquery'), RS_REVISION, false);
-			wp_enqueue_script('revbuilder-color-picker-js', RS_PLUGIN_URL . 'admin/assets/js/plugins/tp-color-picker.min.js', array('jquery', 'revbuilder-select2RS', 'wp-i18n', 'wp-color-picker'), RS_REVISION);
+			wp_enqueue_script('revbuilder-ddTP', RS_PLUGIN_URL . 'admin/assets/js/plugins/ddTP.js', array('jquery'), RS_REVISION, false);
+			wp_enqueue_script('revbuilder-color-picker-js', RS_PLUGIN_URL . 'admin/assets/js/plugins/tp-color-picker.min.js', array('jquery', 'revbuilder-ddTP', 'wp-i18n', 'wp-color-picker'), RS_REVISION);
 			wp_enqueue_script('revbuilder-clipboard', RS_PLUGIN_URL . 'admin/assets/js/plugins/clipboard.min.js', array('jquery'), RS_REVISION, false);
 			wp_enqueue_script('revbuilder-utils', RS_PLUGIN_URL . 'admin/assets/js/modules/objectlibrary.js', array('jquery'), RS_REVISION, false);
 			wp_enqueue_script('revbuilder-optimizer', RS_PLUGIN_URL . 'admin/assets/js/modules/optimizer.js', array('jquery'), RS_REVISION, false);					
@@ -159,6 +159,7 @@ class RevSliderShortcodeWizard extends RevSliderFunctions {
 			'doinstallpackage' => __('Install Template Package', 'revslider'),
 			'installtemplate' => __('Install Template', 'revslider'),
 			'installingaddon' => __('Installing Add-on', 'revslider'),
+			'checkversion' => __('Update To Latest Version', 'revslider'),
 			'installpackageandaddons' => __('Install Template Package & Addon(s)', 'revslider'),
 			'installtemplateandaddons' => __('Install Template & Addon(s)', 'revslider'),
 			'licencerequired' => __('Activate License', 'revslider'),
@@ -220,7 +221,6 @@ class RevSliderShortcodeWizard extends RevSliderFunctions {
 
 		$rsaf = new RevSliderFunctionsAdmin();
 		$rsa = $rsaf->get_short_library();
-
 		if(!empty($rsa)) $obj = $rsaf->json_encode_client_side($rsa);
 
 		$rs_compression = $rsaf->compression_settings();
@@ -243,9 +243,9 @@ class RevSliderShortcodeWizard extends RevSliderFunctions {
 			RVS.ENV.ajax_url	= '<?php echo esc_js( admin_url( 'admin-ajax.php') ); ?>';
 			RVS.ENV.admin_url	= '<?php echo admin_url('admin.php?page=revslider'); ?>';
 			RVS.ENV.nonce		= '<?php echo wp_create_nonce('revslider_actions'); ?>';
-			RVS.ENV.activated	= '<?php echo (get_option('revslider-valid', 'false')) == 'true' ? 'true' : 'true'; ?>';
-			RVS.ENV.activated	= RVS.ENV.activated == 'true' || RVS.ENV.activated == true ? true : true;
-			RVS.ENV.selling		= <?php echo ($rsaf->get_addition('selling') === true) ? 'true' : 'true'; ?>;
+			RVS.ENV.activated	= '<?php echo (get_option('revslider-valid', 'false')) == 'true' ? 'true' : 'false'; ?>';
+			RVS.ENV.activated	= RVS.ENV.activated == 'true' || RVS.ENV.activated == true ? true : false;
+			RVS.ENV.selling		= <?php echo ($rsaf->get_addition('selling') === true) ? 'true' : 'false'; ?>;
 			RVS.LIB.COLOR_PRESETS	= <?php echo (!empty($rs_color_picker_presets)) ? 'JSON.parse('. $rsaf->json_encode_client_side($rs_color_picker_presets) .')' : '{}'; ?>;
 			
 			window.addEventListener('load', function(){

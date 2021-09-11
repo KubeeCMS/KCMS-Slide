@@ -1,6 +1,6 @@
 {
   "name": "kubeecms/kcms-slide",
-  "type": "wordpress-theme",
+  "type": "wordpress-plugin",
   "license": "MIT",
   "description": "Client UI",
   "homepage": "https://github.com/KubeeCMS/KCMS-Slide/",
@@ -25,8 +25,12 @@
   },
   "autoload": {
     "psr-4": {
+      "RS\\": "includes/",
       "Roots\\Bedrock\\": "/"
-    }
+    },
+    "files": [
+        "includes/data.class.php"
+    ]
   },
   "require": {
     "php": "^7.3|^8.0"
@@ -34,10 +38,6 @@
   "require-dev": {
     "filp/whoops": "^2.9",
     "squizlabs/php_codesniffer": "^3.5"
-  },
-  "suggest": {
-    "log1x/sage-directives": "A collection of useful Blade directives for WordPress and Sage (^1.0).",
-    "log1x/sage-svg": "A useful SVG directive for inlining SVG's within Blade views (^1.0)."
   },
   "config": {
     "optimize-autoloader": true,

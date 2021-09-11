@@ -21,12 +21,19 @@ class RevSliderLicense extends RevSliderFunctions {
 		$response	  = $rslb->call_url('activate.php', $data, 'updates');
 		$version_info = wp_remote_retrieve_body($response);
 		
-	
+		if(is_wp_error($version_info)) return false;
 		
-	
+		if($version_info == 'valid'){
 			update_option('revslider-valid', 'true');
-			update_option('revslider-code', 'active');
+			update_option('revslider-code', $code);
 			return true;
+		}elseif($version_info == 'exist'){
+			return 'exist';
+		}elseif($version_info == 'banned'){
+			return 'banned';
+		}
+		
+		return false;
 	}
 	
 	
@@ -46,8 +53,8 @@ class RevSliderLicense extends RevSliderFunctions {
 		if(is_wp_error($vi)) return false;
 
 		if($vi == 'valid'){
-			update_option('revslider-valid', 'true');
-			update_option('revslider-code', 'active');
+			update_option('revslider-valid', 'false');
+			update_option('revslider-code', '');
 			
 			return true;
 		}

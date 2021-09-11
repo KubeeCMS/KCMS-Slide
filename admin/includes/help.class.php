@@ -4797,6 +4797,45 @@ class RevSliderHelp {
 								$st => '#form_nav_mousescroll', 
 								$f => "*[name='sr_reversemousenavigation'][value='reverse']"
 							)
+						),
+						'target' => array(
+							$t => __("Scroll Target", 'revsliderhelp'),
+							$h => "nav.mouse.target",
+							$k => array("mouse scroll", "scroll", "mouse", "scroll target", "target"),
+							$d => __("Choose the page target object which scrolls in your theme so its scroll position can be animated while snapping", 'revsliderhelp'),
+							$a => $u . "keyboard-arrows-mouse-wheel/",
+							$hl => array(
+								$dp => array(array($p => 'settings.type', $v => 'standard::carousel', $o => 'slider_layout_type_standard')),
+								$m => "#module_navigation_trigger, #gst_nav_9", 
+								$st => '#form_nav_mousescroll', 
+								$f => "*[name='sr_targetmousenavigation']"
+							)
+						),
+						'threshold' => array(
+							$t => __("Snap Threshold", 'revsliderhelp'),
+							$h => "nav.mouse.threshold",
+							$k => array("mouse scroll", "scroll", "mouse", "scroll snap", "snap threshold"),
+							$d => __("Sets the threshold within which slider will snap into position while scrolling, threshold is calculated based on slider's distance from top and bottom", 'revsliderhelp'),
+							$a => $u . "keyboard-arrows-mouse-wheel/",
+							$hl => array(
+								$dp => array(array($p => 'settings.type', $v => 'standard::carousel', $o => 'slider_layout_type_standard')),
+								$m => "#module_navigation_trigger, #gst_nav_9", 
+								$st => '#form_nav_mousescroll', 
+								$f => "#wheelsnapthreshold"
+							)
+						),
+						'viewport' => array(
+							$t => __("In ViewPort (%)", 'revsliderhelp'),
+							$h => "nav.mouse.viewport",
+							$k => array("mouse scroll", "scroll", "mouse", "scroll viewport"),
+							$d => __("Determines how much % of slider should be visible when slider should change slide on scroll", 'revsliderhelp'),
+							$a => $u . "keyboard-arrows-mouse-wheel/",
+							$hl => array(
+								$dp => array(array($p => 'settings.type', $v => 'standard::carousel', $o => 'slider_layout_type_standard')),
+								$m => "#module_navigation_trigger, #gst_nav_9", 
+								$st => '#form_nav_mousescroll', 
+								$f => "#wheelifvisible"
+							)
 						)
 					)
 				),
@@ -5320,6 +5359,19 @@ class RevSliderHelp {
 								$m => "#module_slide_trigger, #gst_slide_2,#slidebasic_ts_wrapbrtn > div", 
 								$st => '#sltrans_all_globals', 
 								$f => "#sltrans_duration"
+							)
+						),
+
+						'adpr' => array(
+							$t => __("Prioritize Performance", 'revsliderhelp'),
+							$h => "slideChange.adpr",
+							$k => array("slide transition", "slide animation", "animation performance", "animation blurry", "animation quality"),
+							$d => __("Win performance in complex transitions by reducing the image quality during animations", 'revsliderhelp'),
+							$a => $u . "slide-animation/",
+							$hl => array(
+								$m => "#module_slide_trigger, #gst_slide_2", 
+								$st => '#sltrans_all_globals', 
+								$f => "#sltrans_dpr"
 							)
 						),
 
@@ -7334,6 +7386,19 @@ class RevSliderHelp {
 							)
 						),
 						'svg' => array(
+							'originalColor' => array(
+								$t => __("SVG Original Color", 'revsliderhelp'),
+								$h => "idle.svg.originalColor",
+								$k => array("svg", "svg color", "layer svg", "svg original color", "original color"),
+								$d => __("Disable this option to change color of svg elements in layer", 'revsliderhelp'),
+								$a => $u . "font-colors-styling/",
+								$hl => array(
+									$dp => array('layerselected::object'), 
+									$m => "#module_layers_trigger, #gst_layer_3, #", 
+									$st => '#form_layerstyle_svg', 
+									$f => "*[data-r='idle.svg.originalColor']"
+								)
+							),
 							'color' => array(
 								$t => __("SVG Color", 'revsliderhelp'),
 								$h => "idle.svg.color.#size#.v",
@@ -7397,6 +7462,19 @@ class RevSliderHelp {
 									$m => "#module_layers_trigger, #gst_layer_3", 
 									$st => '#form_layerstyle_svg', 
 									$f => "*[data-r='idle.svg.strokeDashOffset']"
+								)
+							),
+							'styleAll' => array(
+								$t => __("SVG Style All Elements", 'revsliderhelp'),
+								$h => "idle.svg.styleAll",
+								$k => array("svg", "svg color", "layer svg", "svg style all", "style all elements"),
+								$d => __("By default only SVG path gets custom style, Enabling this option will style all svg elements like ellipse, polygon etc", 'revsliderhelp'),
+								$a => $u . "font-colors-styling/",
+								$hl => array(
+									$dp => array('layerselected::object'), 
+									$m => "#module_layers_trigger, #gst_layer_3, #", 
+									$st => '#form_layerstyle_svg', 
+									$f => "*[data-r='idle.svg.styleAll']"
 								)
 							)
 						),
@@ -8694,7 +8772,7 @@ class RevSliderHelp {
 									$t => __("Clip Path Type", 'revsliderhelp'),
 									$h => "timeline.clipPath.type",
 									$k => array("clip path", "clippath", "mask", "masking", "clip path type"),
-									$d => __("Choose 'Rectangle' or 'Circle' for traditional wipes from the sides, center or corners, and 'Inverts' for curtain-type reveals", 'revsliderhelp'),
+									$d => __("Choose 'Rectangle' or 'Circle' for traditional wipes from the sides, center or corners, and 'Custom Mask' for curtain-type reveals", 'revsliderhelp'),
 									$a => $u . "layer-animations/#advanced-settings",
 									$hl => array(
 										$dp => array(
