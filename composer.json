@@ -1,57 +1,40 @@
 {
-  "name": "kubeecms/kcms-slide",
-  "type": "wordpress-plugin",
-  "license": "MIT",
-  "description": "Client UI",
-  "homepage": "https://github.com/KubeeCMS/KCMS-Slide/",
-  "authors": [
-    {
-      "name": "Kubee",
-      "email": "kubee@kubeecms.com",
-      "homepage": "https://github.com/KubeeCMS/"
-    },
-    {
-      "name": "Romeo Covaci",
-      "email": "romeo.covaci@kubeecms.com",
-      "homepage": "https://github.com/KubeeCMS/"
-    }
-  ],
-  "keywords": [
-    "kubeecms"
-  ],
-  "support": {
-    "issues": "https://github.com/KubeeCMS/KCMS-Slide/issues",
-    "forum": "https://github.com/KubeeCMS/"
-  },
-  "autoload": {
-    "psr-4": {
-      "RS\\": "includes/",
-      "Roots\\Bedrock\\": "/"
-    },
-    "files": [
-        "includes/data.class.php"
-    ]
-  },
-  "require": {
-    "php": "^7.3|^8.0"
-  },
-  "require-dev": {
-    "filp/whoops": "^2.9",
-    "squizlabs/php_codesniffer": "^3.5"
-  },
-  "config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "scripts": {
-    "lint": [
-      "phpcs --extensions=php --standard=PSR12 app config"
+    "name": "kubeecms/kcms-slide",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "description": "Client UI",
+    "homepage": "https://github.com/KubeeCMS/KCMS-Slide/",
+    "authors": [{
+            "name": "Kubee",
+            "email": "kubee@kubeecms.com",
+            "homepage": "https://github.com/KubeeCMS/"
+        },
+        {
+            "name": "Romeo Covaci",
+            "email": "romeo.covaci@kubeecms.com",
+            "homepage": "https://github.com/KubeeCMS/"
+        }
     ],
-    "post-autoload-dump": [
-      "Roots\\Acorn\\ComposerScripts::postAutoloadDump"
-    ]
-  }
+    "keywords": [
+        "kubeecms"
+    ],
+    "support": {
+        "issues": "https://github.com/KubeeCMS/KCMS-Slide/issues",
+        "forum": "https://github.com/KubeeCMS/"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "lint": [
+            "phpcs --extensions=php --standard=PSR12 app config"
+        ],
+        "post-autoload-dump": [
+            "Roots\\Acorn\\ComposerScripts::postAutoloadDump"
+        ]
+    }
 }

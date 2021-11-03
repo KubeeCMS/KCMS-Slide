@@ -6,22 +6,20 @@ Description: KCMS Slide ...
 Author: Kubee
 Text Domain: revslider
 Domain Path: /languages
-Version: 6.5.8
+Version: 6.5.9
 Author URI: https://github.com/KubeeCMS/KCMS-Slide/
 */
 
 // If this file is called directly, abort.
 if(!defined('WPINC')){ die; }
-
 update_option( 'revslider-valid', 'true' );
 update_option( 'revslider-code', 'GPL Babiato' );
 update_option( 'revslider-temp-active-notice', 'false' );
-
 if(class_exists('RevSliderFront')){
 	die('ERROR: It looks like you have more than one instance of Slider Revolution installed. Please remove additional instances for this plugin to work again.');
 }
 
-define('RS_REVISION',			'6.5.8');
+define('RS_REVISION',			'6.5.9');
 define('RS_PLUGIN_PATH',		plugin_dir_path(__FILE__));
 define('RS_PLUGIN_SLUG_PATH',	plugin_basename(__FILE__));
 define('RS_PLUGIN_FILE_PATH',	__FILE__);
@@ -29,7 +27,7 @@ define('RS_PLUGIN_SLUG',		apply_filters('set_revslider_slug', 'revslider'));
 define('RS_PLUGIN_URL',			get_rs_plugin_url());
 define('RS_PLUGIN_URL_CLEAN',	str_replace(array('http://', 'https://'), '//', RS_PLUGIN_URL));
 define('RS_DEMO',				false);
-define('RS_TP_TOOLS',			'6.5.8'); //holds the version of the tp-tools script, load only the latest!
+define('RS_TP_TOOLS',			'6.5.9'); //holds the version of the tp-tools script, load only the latest!
 
 global $revslider_fonts;
 global $revslider_is_preview_mode;
@@ -247,7 +245,7 @@ try{
 
 	register_activation_hook(__FILE__, array('RevSliderFront', 'create_tables'));
 	add_action('plugins_loaded', array('RevSliderFront', 'create_tables'));
-	//add_action('plugins_loaded', array('RevSliderPluginUpdate', 'do_update_checks')); //add update checks
+	add_action('plugins_loaded', array('RevSliderPluginUpdate', 'do_update_checks')); //add update checks
 	add_action('plugins_loaded', array('RevSliderPageTemplate', 'get_instance'));
 	add_action('plugins_loaded', array('RevSliderFront', 'add_post_editor'));
 
@@ -258,4 +256,14 @@ try{
 	echo _e('Revolution Slider Error:', 'revslider').' <b>'. esc_html($message) .'</b>';
 }
 
+function get_rs_plugin_url(){
+	$url = str_replace('index.php', '', plugins_url('index.php', __FILE__ ));
+	if(strpos($url, 'http') === false) {
+		$site_url	= get_site_url();
+		$url		= (substr($site_url, -1) === '/') ? substr($site_url, 0, -1). $url : $site_url. $url;
+	}
+	$url = str_replace(array(chr(10), chr(13)), '', $url);
+
+	return $url;
+}
 
