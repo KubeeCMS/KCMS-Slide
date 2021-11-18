@@ -252,7 +252,7 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 	 */
 	public function add_slider_meta_box($post_types = null){
 		try {
-			$post_types = array('post','page');
+			$post_types = array();
 			add_meta_box('slider_revolution_metabox', 'Slider Revolution', array('RevSliderAdmin', 'add_meta_box_content'), $post_types, 'side', 'default');
 		} catch (Exception $e){}
 	}
