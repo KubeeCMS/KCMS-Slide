@@ -2544,12 +2544,12 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 		
 		if(!empty($rs_meta_create)){
 			foreach($rs_meta_create as $attach_id => $save_dir){
+				unset($rs_meta_create[$attach_id]);
+				update_option('rs_image_meta_todo', $rs_meta_create);
+
 				if($attach_data = @wp_generate_attachment_metadata($attach_id, $save_dir)){
 					@wp_update_attachment_metadata($attach_id, $attach_data);
 				}
-				unset($rs_meta_create[$attach_id]);
-				
-				update_option('rs_image_meta_todo', $rs_meta_create);
 			}
 		}
 	}
