@@ -772,6 +772,8 @@ class RevSliderSlider extends RevSliderFunctions {
 		//delete slides
 		$this->delete_all_slides();
 		$this->delete_static_slide();
+
+		do_action('revslider_slider_on_delete_slider', $this->id);
 	}
 	
 	
@@ -1448,6 +1450,10 @@ class RevSliderSlider extends RevSliderFunctions {
 		
 		if($static_id !== false){
 			$slide->init_by_static_id($static_id);
+			$params = $slide->get_params_for_export();
+			if(!isset($params['static'])) $params['static'] = array();
+			$params['static']['isstatic'] = true;
+			
 			$static_slide[] = array(
 				'params'		=> $slide->get_params_for_export(),
 				'slide_order'	=> $slide->get_order(),
@@ -2116,6 +2122,7 @@ class RevSliderSlider extends RevSliderFunctions {
 				$facebook->setTransientSec($this->get_param(array('source', 'facebook', 'transient'), '1200'));
 				if($this->get_param(array('source', 'facebook', 'typeSource'), 'timeline') == 'album'){
 					$posts = $facebook->get_photo_set_photos(
+						$this->id,
 						$this->get_param(array('source', 'facebook', 'appId')),
 						$this->get_param(array('source', 'facebook', 'album')),
 						$this->get_param(array('source', 'facebook', 'count'), 8)
@@ -2123,6 +2130,7 @@ class RevSliderSlider extends RevSliderFunctions {
 					$additions['fb_type']	 = 'album';
 				}else{
 					$posts = $facebook->get_photo_feed(
+						$this->id,
 						$this->get_param(array('source', 'facebook', 'appId')),
 						$this->get_param(array('source', 'facebook', 'page_id')),
 						$this->get_param(array('source', 'facebook', 'count'), 8)

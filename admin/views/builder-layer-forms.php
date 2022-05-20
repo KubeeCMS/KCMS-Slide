@@ -283,8 +283,8 @@ if(!defined('ABSPATH')) exit();
 						<!-- SLIDE VIDEO OVERLAY -->
 							<label_a><?php _e('Overlay', 'revslider');?></label_a><select data-evt="updateslidebasic" id="layer_dotted_overlay" class="dottedoverlay layerinput tos2 nosearchbox easyinit callEvent" data-r="media.dotted"></select>
 							<label_a><?php _e('Size', 'revslider');?></label_a><input data-numeric="true" data-allowed="none" data-min="0"  data-r="media.dottedSize" data-evt="drawBGOverlay"  type="text"  class="layerinput valueduekeyboard  easyinit callEvent" placeholder="none" >
-							<label_a><?php _e('Color 1', 'revslider');?></label_a><input type="text" data-editing="Video Overlay Color 1" data-evt="updateslidebasic" name="layervideooverlaycolor_a" id="layervideooverlaycolor_a" class="my-color-field layerinput easyinit" data-visible="true" data-r="media.dottedColorA" value="transparent">
-							<label_a><?php _e('Color 2', 'revslider');?></label_a><input type="text" data-editing="Video Overlay Color 2" data-evt="updateslidebasic" name="layervideooverlaycolor_b" id="layervideooverlaycolor_b" class="my-color-field layerinput easyinit" data-visible="true" data-r="media.dottedColorB" value="transparent">						
+							<label_a><?php _e('Color 1', 'revslider');?></label_a><input type="text" data-editing="Video Overlay Color 1" data-evt="updateslidebasic" name="layervideooverlaycolor_a" id="layervideooverlaycolor_a" class="my-color-field layerinput easyinit" data-visible="true" data-mode="single" data-r="media.dottedColorA" value="transparent">
+							<label_a><?php _e('Color 2', 'revslider');?></label_a><input type="text" data-editing="Video Overlay Color 2" data-evt="updateslidebasic" name="layervideooverlaycolor_b" id="layervideooverlaycolor_b" class="my-color-field layerinput easyinit" data-visible="true" data-mode="single" data-r="media.dottedColorB" value="transparent">						
 					</div>
 				</div>
 			</div>
@@ -467,8 +467,8 @@ if(!defined('ABSPATH')) exit();
 					<div class="_nflic_ _nvojcm_">
 						<label_a><?php _e('Layer Align', 'revslider');?></label_a>
 						<div class="radiooption">
-							<div><input name="layer_within_align" class="layerinput easyinit" data-r="behavior.baseAlign" type="radio" value="grid"><label_sub><?php _e('Layer Area', 'revslider');?></label_sub></div>
-							<div><input name="layer_within_align" class="layerinput easyinit" data-r="behavior.baseAlign" type="radio" value="slide"><label_sub><?php _e('Scene', 'revslider');?></label_sub></div>
+							<div><input name="layer_within_align" class="layerinput easyinit" data-r="behavior.baseAlign" data-evt="layerAlignChanged" type="radio" value="grid"><label_sub><?php _e('Layer Area', 'revslider');?></label_sub></div>
+							<div><input name="layer_within_align" class="layerinput easyinit" data-r="behavior.baseAlign" data-evt="layerAlignChanged" type="radio" value="slide"><label_sub><?php _e('Scene', 'revslider');?></label_sub></div>
 						</div>
 					</div>
 				</div>
@@ -755,6 +755,12 @@ if(!defined('ABSPATH')) exit();
 						<onelong><label_icon class="ui_rotatez"></label_icon><input  class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="deg" data-r="idle.rotationZ" data-min="-3600" data-max="3600" type="text"></onelong>
 						<oneshort><label_icon class="ui_opacity"></label_icon><input  class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="" data-r="idle.opacity" data-min="0" data-max="1" data-steps="0.05" type="text"></oneshort>
 					</row>
+					<label_a><?php _e('iOS Fix by', 'revslider');?></label_a><select  class="layerinput tos2 nosearchbox easyinit" data-r="idle.filtersIOSFix">
+						<option value="d"><?php _e('Default', 'revslider');?></option>									
+						<option value="z"><?php _e('z', 'revslider');?></option>
+						<option value="x"><?php _e('x', 'revslider');?></option>
+						<option value="r"><?php _e('Rotation', 'revslider');?></option>							
+					</select>
 					
 				</div>
 			</div><!-- END OF BOX SHADOW SETTING -->
@@ -1295,8 +1301,10 @@ if(!defined('ABSPATH')) exit();
 							<row>
 								<onelong class="_ltsel_main_filter"><label_icon class="ui_grayscale"></label_icon><input class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="%" data-min="0" data-max="100" data-r="#frame#.filter.grayscale" type="text"></onelong>
 								<oneshort class="_ltsel_main_filter"><label_icon class="ui_brightness"></label_icon><input class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="%" data-min="0" data-max="10000" data-r="#frame#.filter.brightness" type="text"></oneshort>
-							</row>								
+							</row>															
+							
 							<longoption class="_ltsel_main_filter"><label_a><?php _e('Set Filters on Mask', 'revslider');?></label_a><input type="checkbox" class="layerinput easyinit" data-r="timeline.filtersOnMask"/></longoption>
+							
 							
 							<div class="div15"></div>
 							<div class="form_inner_header innerwrap_breakout"><i class="material-icons">settings_brightness</i><?php _e('Layer Back-Drop Filter', 'revslider');?></div>

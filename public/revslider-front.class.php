@@ -179,7 +179,10 @@ class RevSliderFront extends RevSliderFunctions {
 		
 	}
 	
-	
+	public static function welcome_screen_activate(){
+		set_transient('_revslider_welcome_screen_activation_redirect', true, 60);
+	}
+
 	/**
 	 * Add Meta Generator Tag in FrontEnd
 	 * @since: 5.0
@@ -414,7 +417,7 @@ class RevSliderFront extends RevSliderFunctions {
 				try {								
 					var pw = document.getElementById(e.c).parentNode.offsetWidth,
 						newh;
-					pw = pw===0 || isNaN(pw) ? window.RSIW : pw;
+					pw = pw===0 || isNaN(pw) || (e.l=="fullwidth" || e.layout=="fullwidth") ? window.RSIW : pw;
 					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
 					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
 					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
@@ -466,7 +469,7 @@ class RevSliderFront extends RevSliderFunctions {
 				try {
 					var pw = document.getElementById(e.c).parentNode.offsetWidth,
 						newh;
-					pw = pw===0 || isNaN(pw) ? window.RSIW : pw;
+					pw = pw===0 || isNaN(pw) || (e.l=="fullwidth" || e.layout=="fullwidth") ? window.RSIW : pw;
 					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
 					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
 					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
