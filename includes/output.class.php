@@ -5393,14 +5393,14 @@ rs-module .material-icons {
 					if($img_data !== false && !empty($img_data)){
 						if($img_size !== 'full'){
 							if(isset($img_data['sizes']) && isset($img_data['sizes'][$img_size])){
-								$img_w = $img_data['sizes'][$img_size]['width'];
-								$img_h = $img_data['sizes'][$img_size]['height'];
+								$img_w = $this->get_val($img_data, array('sizes', $img_size, 'width'));
+								$img_h = $this->get_val($img_data, array('sizes', $img_size, 'height'));
 							}
 						}
 						
 						if($img_w == '' || $img_h == ''){
-							$img_w = $img_data['width'];
-							$img_h = $img_data['height'];
+							$img_w =  $this->get_val($img_data, 'width');
+							$img_h =  $this->get_val($img_data, 'height');
 						}
 						$additional.= ' width="'.$img_w.'" height="'.$img_h.'"';
 					}

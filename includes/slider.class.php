@@ -22,6 +22,7 @@ class RevSliderSlider extends RevSliderFunctions {
 	public $inited			= false;
 	public $map;
 	public $template_slider	= false;
+	public $is_woocommerce	= false;
 
 	/**
 	 * @var RevSliderSlide
@@ -2319,6 +2320,7 @@ class RevSliderSlider extends RevSliderFunctions {
 		$max_posts	= (empty($max_posts) || !is_numeric($max_posts)) ? -1 : $max_posts;
 		$post_types	= $this->get_param(array('source', 'woo', 'types'), 'any');
 		$addition	= array();
+		$this->is_woocommerce = true;
 		
 		if($published == true){ //Events integration
 			$addition['post_status'] = 'publish';
@@ -2556,16 +2558,19 @@ class RevSliderSlider extends RevSliderFunctions {
 			$query = array_merge($query, $addition);
 		}
 		
-		$query = apply_filters('revslider_get_posts', $query, $slider_id);
-		
+		$query		= apply_filters('revslider_get_posts', $query, $slider_id);
 		$full_posts	= new WP_Query($query);
 		$posts		= $full_posts->posts;
 		
-		foreach($posts as $key => $post){
-			$arr_post = (method_exists($post, 'to_array')) ? $post->to_array() : (array)$post;
-			$arr_post['categories'] = $this->get_post_categories($post, $tax);
-			
-			$posts[$key] = $arr_post;
+		if($this->is_woocommerce) $posts = RevSliderWooCommerce::filter_products_by_price($posts, $this->get_params());
+
+		if(!empty($posts)){
+			foreach($posts as $key => $post){
+				$arr_post = (method_exists($post, 'to_array')) ? $post->to_array() : (array)$post;
+				$arr_post['categories'] = $this->get_post_categories($post, $tax);
+				
+				$posts[$key] = $arr_post;
+			}
 		}
 		
 		return $posts;

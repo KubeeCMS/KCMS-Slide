@@ -27,6 +27,7 @@ class RevSliderFront extends RevSliderFunctions {
 
 	public function __construct(){		
 		add_action('wp_enqueue_scripts', array('RevSliderFront', 'add_actions'));
+		add_filter('wp_img_tag_add_loading_attr', array('RevSliderFront', 'check_lazy_loading'), 99, 3);
 	}
 	
 	
@@ -295,7 +296,14 @@ class RevSliderFront extends RevSliderFunctions {
 			}
 		</script>
 		<?php
-}
+	}
+	
+	/**
+	 * check that loading="lazy" is not written in slider HTML
+	 **/
+	public static function check_lazy_loading($value, $image, $context){
+		return (strpos($image, 'tp-rs-img') !== false) ? false : $value;
+	}
 
 	/**
 	 * add admin nodes
