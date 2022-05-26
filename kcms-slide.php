@@ -2,7 +2,7 @@
 /*
 Plugin Name: KCMS Slide
 Plugin URI: https://github.com/KubeeCMS/KCMS-Slide/
-Description: KCMS Slide ...
+Description: Slide ...
 Author: Kubee
 Text Domain: revslider
 Domain Path: /languages
