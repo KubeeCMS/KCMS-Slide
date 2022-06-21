@@ -1,2 +1,0 @@
-# KCMS-Slide
-KCMS Slide
