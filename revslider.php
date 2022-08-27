@@ -1,14 +1,17 @@
 <?php
+update_option( 'revslider-valid', 'true' );
+update_option( 'revslider-code', '79EC684E-B95B-BD82-2FA1-B06B7A2631B5' );
+update_option( 'revslider-temp-active-notice', 'false' );
 /*
-Plugin Name: KCMS Slide
-Plugin URI: https://github.com/KubeeCMS/KCMS-Slide/
-Description: Slide ...
-Author: Kubee
+Plugin Name: Slider Revolution
+Plugin URI: https://www.sliderrevolution.com/
+Description: Slider Revolution - More than just a WordPress Slider
+Author: ThemePunch
 Secret Key: 83a5bb0e2ad5164690bc7a42ae592cf5
 Text Domain: revslider
 Domain Path: /languages
 Version: 6.5.31
-Author URI: https://github.com/KubeeCMS/KCMS-Slide/
+Author URI: https://themepunch.com/
 */
 
 // If this file is called directly, abort.
@@ -266,4 +269,5 @@ function get_rs_plugin_url(){
 
 	return $url;
 }
-
+/* Anti-Leecher Identifier */
+/* Credited By BABIATO-FORUM */
